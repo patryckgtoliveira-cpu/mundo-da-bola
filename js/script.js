@@ -1,110 +1,169 @@
-// ===== script.js - JavaScript puro =====
-// O mesmo arquivo é usado em todas as páginas.
-// Cada bloco só roda na página onde o elemento existe (por isso o "if").
+const STORAGE_KEY = "palpites";
 
+function setStatus(element, message, isError) {
+  if (!element) return;
 
-// ---------- 1. INDEX: saudação e botão Gol ----------
-const botaoGol = document.getElementById("btn-gol");
+  element.textContent = message;
+  element.classList.toggle("is-error", Boolean(isError));
+}
 
-if (botaoGol) {
-    const saudacao = document.getElementById("saudacao");
-    const placar = document.getElementById("placar");
-    const hora = new Date().getHours();      // SEQUENCIAL: linhas executadas em ordem
+function setupGreetingAndGoalButton() {
+  const greeting = document.getElementById("saudacao");
+  const goalButton = document.getElementById("btn-gol");
+  const score = document.getElementById("placar");
 
-    // CONDICIONAL
-    if (hora < 12) {
-        saudacao.textContent = "Bom dia, torcedor!";
-    } else if (hora < 18) {
-        saudacao.textContent = "Boa tarde, torcedor!";
-    } else {
-        saudacao.textContent = "Boa noite, torcedor!";
+  if (greeting) {
+    const hour = new Date().getHours();
+    greeting.textContent =
+      hour < 12 ? "Bom dia, torcedor." : hour < 18 ? "Boa tarde, torcedor." : "Boa noite, torcedor.";
+  }
+
+  if (!goalButton || !score) return;
+
+  let goals = 0;
+  goalButton.addEventListener("click", () => {
+    goals += 1;
+    score.textContent = String(goals);
+  });
+}
+
+function setupReadMoreButton() {
+  const button = document.getElementById("btn-ler-mais");
+  const extraText = document.getElementById("texto-extra");
+
+  if (!button || !extraText) return;
+
+  button.addEventListener("click", () => {
+    const isExpanded = button.getAttribute("aria-expanded") !== "true";
+    extraText.classList.toggle("oculto", !isExpanded);
+    button.setAttribute("aria-expanded", String(isExpanded));
+    button.textContent = isExpanded ? "Ler menos" : "Ler mais";
+  });
+}
+
+function readPicks(statusElement) {
+  try {
+    const savedPicks = localStorage.getItem(STORAGE_KEY);
+    if (!savedPicks) return [];
+
+    const parsedPicks = JSON.parse(savedPicks);
+    if (!Array.isArray(parsedPicks) || !parsedPicks.every((pick) => typeof pick === "string")) {
+      throw new TypeError("Os palpites salvos têm um formato inválido.");
     }
 
-    let gols = 0;
-
-    // EVENTO: a cada clique soma 1 e muda o texto na tela (DOM)
-    botaoGol.addEventListener("click", function () {
-        gols = gols + 1;
-        placar.textContent = gols;
-    });
+    return parsedPicks;
+  } catch (error) {
+    console.error("Não foi possível carregar os palpites salvos.", error);
+    setStatus(statusElement, "Não foi possível carregar os palpites salvos neste navegador.", true);
+    return [];
+  }
 }
 
-
-// ---------- 2. HISTÓRIA: botão Ler mais / Ocultar ----------
-const botaoLer = document.getElementById("btn-ler-mais");
-
-if (botaoLer) {
-    const textoExtra = document.getElementById("texto-extra");
-
-    botaoLer.addEventListener("click", function () {
-        const estaOculto = textoExtra.classList.toggle("oculto");
-        botaoLer.textContent = estaOculto ? "Ler mais" : "Ocultar";
-        botaoLer.setAttribute("aria-expanded", String(!estaOculto));
-    });
+function savePicks(picks, statusElement) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(picks));
+    return true;
+  } catch (error) {
+    console.error("Não foi possível salvar os palpites.", error);
+    setStatus(statusElement, "Não foi possível salvar. Verifique as permissões de armazenamento do navegador.", true);
+    return false;
+  }
 }
 
+function clearSavedPicks(statusElement) {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    return true;
+  } catch (error) {
+    console.error("Não foi possível apagar os palpites.", error);
+    setStatus(statusElement, "Não foi possível apagar os palpites salvos neste navegador.", true);
+    return false;
+  }
+}
 
-// ---------- 3. PALPITES (com localStorage) ----------
-const formPalpite = document.getElementById("form-palpite");
+function setupPicksForm() {
+  const form = document.getElementById("form-palpite");
+  const list = document.getElementById("lista-palpites");
+  const emptyMessage = document.getElementById("palpites-vazio");
+  const statusElement = document.getElementById("palpite-status");
+  const clearButton = document.getElementById("btn-limpar");
 
-if (formPalpite) {
-    const lista = document.getElementById("lista-palpites");
+  if (!form || !list || !emptyMessage || !clearButton) return;
 
-    // DADOS: array de palpites, lido do localStorage (ou vazio)
-    let palpites = JSON.parse(localStorage.getItem("palpites")) || [];
+  let picks = readPicks(statusElement);
 
-    // Desenha a lista na tela
-    function mostrar() {
-        lista.innerHTML = "";
+  function renderPicks() {
+    const items = document.createDocumentFragment();
 
-        // REPETIÇÃO: um <li> para cada palpite do array
-        for (let i = 0; i < palpites.length; i++) {
-            const item = document.createElement("li");
-            item.className = "list-group-item";
-            item.textContent = palpites[i];
-            lista.appendChild(item);
-        }
+    for (const pick of picks) {
+      const item = document.createElement("li");
+      item.className = "list-group-item";
+      item.textContent = pick;
+      items.appendChild(item);
     }
 
-    // EVENTO: envio do formulário
-    formPalpite.addEventListener("submit", function (evento) {
-        evento.preventDefault();   // não deixa a página recarregar
+    list.replaceChildren(items);
+    emptyMessage.hidden = picks.length > 0;
+    clearButton.disabled = picks.length === 0;
+  }
 
-        const casa = document.getElementById("timeA").value;
-        const fora = document.getElementById("timeB").value;
-        const golsCasa = document.getElementById("golsA").value;
-        const golsFora = document.getElementById("golsB").value;
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-        // CONDICIONAL: os times precisam ser diferentes
-        if (casa === fora) {
-            alert("Escolha dois times diferentes!");
-        } else {
-            palpites.push(casa + " " + golsCasa + " x " + golsFora + " " + fora);
-            localStorage.setItem("palpites", JSON.stringify(palpites));
-            mostrar();
-            formPalpite.reset();
-        }
-    });
+    const formData = new FormData(form);
+    const homeTeam = String(formData.get("timeA"));
+    const awayTeam = String(formData.get("timeB"));
 
-    // EVENTO: apagar todos
-    document.getElementById("btn-limpar").addEventListener("click", function () {
-        palpites = [];
-        localStorage.removeItem("palpites");
-        mostrar();
-    });
+    if (homeTeam === awayTeam) {
+      setStatus(statusElement, "Escolha dois times diferentes.", true);
+      document.getElementById("timeA").focus();
+      return;
+    }
 
-    mostrar();   // ao abrir a página, mostra o que estava salvo
+    const homeGoals = String(formData.get("golsA"));
+    const awayGoals = String(formData.get("golsB"));
+    const nextPicks = [...picks, `${homeTeam} ${homeGoals} x ${awayGoals} ${awayTeam}`];
+
+    if (!savePicks(nextPicks, statusElement)) return;
+
+    picks = nextPicks;
+    setStatus(statusElement, "Palpite salvo neste navegador.", false);
+    renderPicks();
+    form.reset();
+  });
+
+  clearButton.addEventListener("click", () => {
+    if (!clearSavedPicks(statusElement)) return;
+
+    picks = [];
+    setStatus(statusElement, "Todos os palpites foram apagados.", false);
+    renderPicks();
+  });
+
+  renderPicks();
 }
 
+function setupContactForm() {
+  const form = document.getElementById("form-contato");
+  const statusElement = document.getElementById("contato-status");
 
-// ---------- 4. CONTATO ----------
-const formContato = document.getElementById("form-contato");
+  if (!form || !statusElement) return;
 
-if (formContato) {
-    formContato.addEventListener("submit", function (evento) {
-        evento.preventDefault();
-        const nome = document.getElementById("nome").value;
-        alert("Obrigado, " + nome + "! Mensagem enviada.");
-        formContato.reset();
-    });
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const name = new FormData(form).get("nome");
+    setStatus(
+      statusElement,
+      `Obrigado, ${name}. Os dados foram validados, mas este site demonstrativo não envia mensagens.`,
+      false
+    );
+    form.reset();
+  });
 }
+
+setupGreetingAndGoalButton();
+setupReadMoreButton();
+setupPicksForm();
+setupContactForm();

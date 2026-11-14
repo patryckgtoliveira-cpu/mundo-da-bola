@@ -3,15 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Futebol, história, clubes, jogadores, Copas do Mundo e palpites no Mundo da Bola." />
     <title>Início - Mundo da Bola</title>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2748/2748619.png" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
 
   <body>
-    <header>
-      <nav class="menu">
-        <a href="index.html">Início</a>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <header class="site-header">
+      <a class="site-brand" href="index.html" aria-label="Mundo da Bola — início">
+        MUNDO <span>DA BOLA</span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a href="index.html" aria-current="page">Início</a>
         <a href="historia.html">História</a>
         <a href="times.html">Times</a>
         <a href="jogadores.html">Jogadores</a>
@@ -21,18 +26,20 @@
         <a href="noticias.html">Notícias</a>
         <a href="palpites.html">Palpites</a>
         <a href="contato.html">Contato</a>
-        <a href="https://www.fifa.com" target="_blank">FIFA</a>
+        <a href="https://www.fifa.com" target="_blank" rel="noopener noreferrer">FIFA ↗</a>
       </nav>
     </header>
 
-    <main class="conteiner">
+    <main id="conteudo" class="page-main">
       <section class="apresentacao">
         <div>
+          <p class="eyebrow">O futebol dentro e fora de campo</p>
           <h1 id="titulo-principal">Mundo da Bola</h1>
           <h2 id="saudacao"></h2>
-          <p style="font-style: italic;">O site de quem vive o futebol.</p>
-          <button id="btn-gol" class="botao">Gol!</button>
-          <p>Gols da torcida: <span id="placar">0</span></p>
+          <p class="hero-tagline">O site de quem vive o futebol.</p>
+          <button id="btn-gol" class="botao" type="button">Gol!</button>
+          <p>Gols da torcida: <span id="placar" aria-live="polite" aria-atomic="true">0</span></p>
+          <a class="hero-link" href="noticias.html">Acompanhe os destaques <span aria-hidden="true">↗</span></a>
         </div>
 
         <img
@@ -42,7 +49,8 @@
       </section>
 
       <section>
-        <h2>Explore o site</h2>
+        <p class="eyebrow">Explore</p>
+        <h2>O jogo por todos os ângulos</h2>
 
         <div class="cartoes">
           <article class="cartao">
@@ -75,9 +83,9 @@
             <p>
               <small>
                 Foto:
-                <a href="https://commons.wikimedia.org/wiki/User:Vujcic" target="_blank">Djuradj Vujcic</a>
-                / <a href="https://commons.wikimedia.org/wiki/File:FIFA_World_Cup_Trophy_photo_by_Djuradj_Vujcic.jpg" target="_blank">Wikimedia Commons</a>
-                (<a href="https://creativecommons.org/licenses/by/2.0/" target="_blank">CC BY 2.0</a>).
+                <a href="https://commons.wikimedia.org/wiki/User:Vujcic" target="_blank" rel="noopener noreferrer">Djuradj Vujcic</a>
+                / <a href="https://commons.wikimedia.org/wiki/File:FIFA_World_Cup_Trophy_photo_by_Djuradj_Vujcic.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>
+                (<a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">CC BY 2.0</a>).
               </small>
             </p>
             <p>Campeões das últimas Copas do Mundo.</p>

@@ -1,47 +1,35 @@
 # Mundo da Bola
 
-Site de futebol com páginas estáticas em HTML, CSS e JavaScript. O projeto reúne informações sobre história, times, jogadores, vídeos, notícias e palpites.
+Site editorial sobre futebol, construído com HTML, CSS, JavaScript e componentes do Bootstrap 5.
 
-## Estrutura
+## Páginas
 
-- `index.html` — página inicial
-- `historia.html` — história do futebol
-- `times.html` — principais times
-- `jogadores.html` — craques e atletas
-- `copas.html` — copa do mundo e títulos
-- `videos.html` — vídeos
-- `audios.html` — áudios
-- `noticias.html` — notícias
-- `palpites.html` — palpites
-- `contato.html` — contato
-- `css/style.css` — estilos
-- `js/script.js` — interações
-- `video/futebol.mp4` — vídeo local de futebol
+- `index.html` — apresentação e atalhos para o conteúdo
+- `historia.html` — origens e marcos do futebol
+- `times.html` — clubes brasileiros
+- `jogadores.html` — galeria de craques
+- `copas.html` — sedes e campeões
+- `videos.html` — vídeo incorporado da Copa de 1958
+- `audios.html` — reprodução local do Hino Nacional Brasileiro
+- `noticias.html` — destaques do site
+- `palpites.html` — palpites salvos no navegador
+- `contato.html` — formulário demonstrativo de contato
 
-## Tecnologias
+## Recursos locais
 
-- HTML5
-- CSS3
-- JavaScript
-- Bootstrap
+- `css/style.css` — identidade visual, componentes e regras responsivas
+- `js/script.js` — interações do site
+- `audio/hino.mp3` — gravação coral do hino, em domínio público
 
-## Como rodar
+O formulário de contato não envia dados a um servidor. Os palpites ficam salvos no `localStorage` do navegador. O vídeo incorporado requer conexão com a internet.
 
-Abra qualquer arquivo HTML em um navegador, ou use um servidor local simples como:
+## Executar localmente
+
+Na pasta do projeto, inicie um servidor estático:
 
 ```bash
 python -m http.server 8000
 ```
 
-Depois acesse `http://localhost:8000`.
-
-## GitHub
-
-```bash
-git init
-git add .
-git commit -m "feat: adiciona projeto mundo da bola"
-git branch -M main
-git remote add origin https://github.com/SEU-USUARIO/mundo-da-bola.git
-git push -u origin main
-```
+Abra `http://localhost:8000` no navegador.
+Também é possível iniciar o servidor com `npm start`.

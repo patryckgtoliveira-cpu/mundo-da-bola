@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Destaques sobre Copas, craques e palpites do futebol." />
     <title>Notícias - Mundo da Bola</title>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2748/2748619.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -10,75 +11,69 @@
   </head>
 
   <body>
-    <header>
-      <nav class="navbar navbar-expand navbar-dark bg-success">
-        <div class="container-fluid justify-content-center">
-          <div class="navbar-nav flex-wrap">
-            <a class="nav-link" href="index.html">Início</a>
-            <a class="nav-link" href="historia.html">História</a>
-            <a class="nav-link" href="times.html">Times</a>
-            <a class="nav-link" href="jogadores.html">Jogadores</a>
-            <a class="nav-link" href="copas.html">Copas</a>
-            <a class="nav-link" href="videos.html">Vídeos</a>
-            <a class="nav-link" href="audios.html">Áudios</a>
-            <a class="nav-link" href="noticias.html">Notícias</a>
-            <a class="nav-link" href="palpites.html">Palpites</a>
-            <a class="nav-link" href="contato.html">Contato</a>
-            <a class="nav-link" href="https://www.fifa.com" target="_blank">FIFA</a>
-          </div>
-        </div>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <header class="site-header">
+      <a class="site-brand" href="index.html" aria-label="Mundo da Bola — início">
+        MUNDO <span>DA BOLA</span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a href="index.html">Início</a>
+        <a href="historia.html">História</a>
+        <a href="times.html">Times</a>
+        <a href="jogadores.html">Jogadores</a>
+        <a href="copas.html">Copas</a>
+        <a href="videos.html">Vídeos</a>
+        <a href="audios.html">Áudios</a>
+        <a href="noticias.html" aria-current="page">Notícias</a>
+        <a href="palpites.html">Palpites</a>
+        <a href="contato.html">Contato</a>
+        <a href="https://www.fifa.com" target="_blank" rel="noopener noreferrer">FIFA ↗</a>
       </nav>
     </header>
 
-    <main class="container py-4">
+    <main id="conteudo" class="page-main">
       <h1>Destaques do futebol</h1>
       <div class="alert alert-info">Notícias e destaques dedicados exclusivamente ao futebol.</div>
 
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="col">
-          <article class="card h-100">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/3/32/Confedera%C3%A7%C3%A3o_Brasileira_de_Futebol_logo_%282020%29.svg"
-              class="card-img-top imagem-logo"
-              alt="Escudo da Seleção Brasileira de Futebol"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Os campeões do mundo</h5>
-              <p class="card-text">Veja quem levantou a taça nas últimas Copas.</p>
-              <a href="copas.html" class="btn btn-success">Ver campeões</a>
-            </div>
-          </article>
-        </div>
+      <div class="news-grid">
+        <article class="card">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/3/32/Confedera%C3%A7%C3%A3o_Brasileira_de_Futebol_logo_%282020%29.svg"
+            class="card-img-top imagem-logo"
+            alt="Escudo da Seleção Brasileira de Futebol"
+          />
+          <div class="card-body">
+            <h2 class="card-title">Os campeões do mundo</h2>
+            <p class="card-text">Veja quem levantou a taça nas últimas Copas.</p>
+            <a href="copas.html" class="btn btn-success">Ver campeões</a>
+          </div>
+        </article>
 
-        <div class="col">
-          <article class="card h-100">
-            <img
-              src="https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&w=900&q=80"
-              class="card-img-top"
-              alt="Os craques de sempre"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Os craques de sempre</h5>
-              <p class="card-text">Reveja os jogadores que marcaram época.</p>
-              <a href="jogadores.html" class="btn btn-success">Ver craques</a>
-            </div>
-          </article>
-        </div>
+        <article class="card">
+          <img
+            src="https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&w=900&q=80"
+            class="card-img-top"
+            alt="Jogador em campo"
+          />
+          <div class="card-body">
+            <h2 class="card-title">Os craques de sempre</h2>
+            <p class="card-text">Reveja os jogadores que marcaram época.</p>
+            <a href="jogadores.html" class="btn btn-success">Ver craques</a>
+          </div>
+        </article>
 
-        <div class="col">
-          <article class="card h-100">
-            <img
-              src="https://images.unsplash.com/photo-1518604666860-9ed391f76460?auto=format&fit=crop&w=900&q=80"
-              class="card-img-top"
-              alt="Faça seu palpite"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Faça seu palpite</h5>
-              <p class="card-text">Dê seu palpite para a próxima rodada.</p>
-              <a href="palpites.html" class="btn btn-success">Dar palpite</a>
-            </div>
-          </article>
-        </div>
+        <article class="card">
+          <img
+            src="https://images.unsplash.com/photo-1518604666860-9ed391f76460?auto=format&fit=crop&w=900&q=80"
+            class="card-img-top"
+            alt="Bola de futebol pronta para a partida"
+          />
+          <div class="card-body">
+            <h2 class="card-title">Faça seu palpite</h2>
+            <p class="card-text">Dê seu palpite para a próxima rodada.</p>
+            <a href="palpites.html" class="btn btn-success">Dar palpite</a>
+          </div>
+        </article>
       </div>
     </main>
 

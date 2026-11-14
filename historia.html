@@ -3,16 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Uma viagem pela história do futebol, de suas origens aos grandes momentos." />
     <title>História - Mundo da Bola</title>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2748/2748619.png" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
 
   <body>
-    <header>
-      <nav class="menu">
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <header class="site-header">
+      <a class="site-brand" href="index.html" aria-label="Mundo da Bola — início">
+        MUNDO <span>DA BOLA</span>
+      </a>
+      <nav class="site-nav" aria-label="Navegação principal">
         <a href="index.html">Início</a>
-        <a href="historia.html">História</a>
+        <a href="historia.html" aria-current="page">História</a>
         <a href="times.html">Times</a>
         <a href="jogadores.html">Jogadores</a>
         <a href="copas.html">Copas</a>
@@ -21,11 +26,11 @@
         <a href="noticias.html">Notícias</a>
         <a href="palpites.html">Palpites</a>
         <a href="contato.html">Contato</a>
-        <a href="https://www.fifa.com" target="_blank">FIFA</a>
+        <a href="https://www.fifa.com" target="_blank" rel="noopener noreferrer">FIFA ↗</a>
       </nav>
     </header>
 
-    <main class="conteiner">
+    <main id="conteudo" class="page-main">
       <article class="noticia-destaque">
         <h1>A história do futebol</h1>
 
@@ -67,7 +72,7 @@
           height="315"
           src="https://www.youtube-nocookie.com/embed/crKwlbwvr88?playsinline=1&rel=0"
           title="Cobrança de falta de Roberto Carlos contra a França, em 1997"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
           loading="lazy"
