@@ -33,10 +33,17 @@
     <main class="container py-4">
       <h1>Áudios</h1>
 
-      <audio controls>
-        <source src="audio/hino.mp3" type="audio/mpeg" />
-        Seu navegador não suporta áudio.
-      </audio>
+      <section>
+        <h2>Hino Nacional Brasileiro</h2>
+        <audio controls preload="metadata">
+          <source src="audio/hino.mp3" type="audio/mpeg" />
+          Seu navegador não suporta áudio.
+        </audio>
+        <p class="small text-muted">
+          Gravação coral em domínio público, disponibilizada pelo
+          <a href="https://archive.org/details/hinoNacionalCoral" target="_blank">Internet Archive</a>.
+        </p>
+      </section>
     </main>
 
     <footer class="rodape">

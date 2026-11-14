@@ -151,20 +151,37 @@ audio {
 }
 
 .card-img-top {
-    width: 85%;
-    height: 180px;
-    object-fit: contain;
     display: block;
-    margin: 16px auto 0;
-    padding: 8px;
-    border-radius: 12px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(20,83,45,0.04));
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    object-fit: cover;
+}
+
+.card-img-top.imagem-logo {
+    object-fit: contain;
+    padding: 1rem;
+    background-color: #f4f7f4;
 }
 
 .cartao img {
     width: 100%;
     height: 150px;
     object-fit: cover;
+}
+
+.imagem-taca {
+    display: block;
+    width: 100%;
+    max-height: 420px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.cartao .imagem-taca {
+    height: 150px;
+    object-fit: contain;
+    background-color: #f3f5f3;
 }
 
 .cartao a:hover {
@@ -190,7 +207,8 @@ audio {
 
 .galeria img {
     width: 100%;
-    height: 200px;
+    aspect-ratio: 1 / 1;
+    height: auto;
     object-fit: cover;
     display: block;
     object-position: center top;
