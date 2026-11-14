@@ -21,6 +21,13 @@ audio {
     width: 100%;
 }
 
+.noticia-video iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 0;
+}
+
 /* ---------- Seletores de ID ---------- */
 #titulo-principal {
     font-size: 40px;
